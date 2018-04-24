@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<ul>
+    <li th:each="newpost : ${newposts}">
+        <a th:href="'/newpost/view/' + ${newpost.id}" th:text="${newpost.name}" ></a>
+    </li>
+</ul>
+
+<p>
+    <a href="/newpost/submit">New Post</a>
+</p>
+
+</body>
+</html>

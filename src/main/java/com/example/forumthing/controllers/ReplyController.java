@@ -1,9 +1,7 @@
 package com.example.forumthing.controllers;
 
-package com.example.forumthing.controllers;
-
-        mport org.springframework.beans.factory.annotation.Autowired;
 import com.example.forumthing.models.NewPost;
+import com.example.forumthing.models.data.ReplyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +47,8 @@ public class ReplyController {
 
             return "reply/submit";
         }
-        replyDao.save(newReply);
+
+        //replyDao.save(newReply);
 
         return "redirect:";
     }

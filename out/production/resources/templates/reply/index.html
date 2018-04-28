@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${reply} and ${replies.size()}">No Replies Yet</p>
+
+
+<table th:if="${replies} and ${replies.size()}" class="table">
+
+    <tr>
+        <th>Body</th>
+    </tr>
+
+    <tr th:each="reply : ${replies}">
+        <td th:text="${reply.body}"></td>
+    </tr>
+
+</table>
+
+<a href="/reply/submit">Post</a>
+
+</body>
+</html>

@@ -1,8 +1,8 @@
 package com.example.forumthing.controllers;
 
-mport org.springframework.beans.factory.annotation.Autowired;
-import com.example.forumthing.models.NewPost;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.forumthing.models.NewPost;
+import com.example.forumthing.models.data.NewPostDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

@@ -8,15 +8,22 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<ul>
-    <li th:each=" : ${reply}">
-        <a th:href="'/reply/view/' + ${reply.id}" th:text="${reply.body}" ></a>
-    </li>
-</ul>
+<p th:unless="${thread} and ${threads.size()}">No Replies Yet</p>
 
-<p>
-    <a href="/reply/submit">Reply</a>
-</p>
+
+<table th:if="${threads} and ${threads.size()}" class="table">
+
+    <tr>
+        <th>Body</th>
+    </tr>
+
+    <tr th:each="thread : ${threads}">
+        <td th:text="${thread.body}"></td>
+    </tr>
+
+</table>
+
+<a href="/reply/submit">Post</a>
 
 </body>
 </html>

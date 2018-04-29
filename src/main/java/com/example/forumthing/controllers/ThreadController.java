@@ -1,9 +1,6 @@
 package com.example.forumthing.controllers;
 
-import com.example.forumthing.models.NewPost;
-import com.example.forumthing.models.Reply;
 import com.example.forumthing.models.data.ThreadDao;
-import com.example.forumthing.models.data.ReplyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,47 +13,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
+
 @RequestMapping("thread")
 public class ThreadController {
 
     @Autowired
     private ThreadDao threadDao;
 
-    @RequestMapping(value = "")
-    public String index(Model model) {
+    @RequestMapping(value="")
+    public String index(Model model){
+
+        model.addAttribute("threads", threadDao.findAll());
         model.addAttribute("title", "Posts");
-        model.addAttribute("Thread", threadDao.findAll());
 
         return "thread/index";
     }
 
-    @RequestMapping(value = "submit", method = RequestMethod.GET)
-    public String submit (Model model) {
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String add(Model model){
+
+        model.addAttribute("thread", new Thread());
         model.addAttribute("title", "Reply");
-        model.addAttribute(new Reply());
-        return "reply/submit";
+
+        return "thread/reply";
     }
 
-    @RequestMapping(value = "submit", method = RequestMethod.POST)
-    public String submit (Model model, @ModelAttribute @Valid Reply reply, Errors errors) {
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String add(Model model, @ModelAttribute @Valid Thread thread, Errors errors) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Submit Reply");
-            return "reply/submit";
+        if(errors.hasErrors() ){
+            model.addAttribute("title", "Reply");
+            return "category/add";
         }
 
-        threadDao.save(thread);
-
-        return "redirect:view/" + reply.getId();
-    }
-
-    @RequestMapping(value = "view/{newpostId}", method = RequestMethod.GET)
-    public String viewNewpost(Model model, @PathVariable int newpostId) {
-
-        NewPost newpost = Reply.findOne(replyId);
-        model.addAttribute("reply", reply);
-
-        return "thread/view";
+        //threadDao.save(thread);
+        return "redirect:";
     }
 
 }

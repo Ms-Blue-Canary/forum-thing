@@ -48,7 +48,7 @@ public class NewPostController {
         }
         newpostDao.save(newNewPost);
 
-        return "redirect:";
+        return "redirect:view/"+ newNewPost.getId();
     }
 
 }
